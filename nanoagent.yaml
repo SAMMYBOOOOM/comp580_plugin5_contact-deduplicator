@@ -1,37 +1,33 @@
-"_ > nanoagent.plugin.v0001.ManifestConfig:
-id: contact-deduplicator
-name: Contact Deduplicator
-version: 0.1.0
-status: in-development
-spec: nanoagent.plugin/v0001
-
-runtime > nanoagent.plugin.v0001.RuntimeConfig:
-  type: mcp_stdio
-  command: [uv, run, --frozen, python, -m, plugin]
-
-permissions > nanoagent.plugin.v0001.PermissionsConfig:
-  network > nanoagent.plugin.v0001.NetworkConfig:
-    hosts: []
-  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
-    write: [workspace]
-
-tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
-  deduplicate_contacts:
-    description: Identifies duplicate contacts through normalized email or phone matches and returns deterministic groups of original contact indices.
-
-tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
-  deduplicate-contacts:
-    description: Groups contacts sharing a non-empty normalized email address or phone number.
-    runner: tool
-    tools: [deduplicate_contacts]
-    reference: null
-    instructions: >-
-      Identify duplicate contacts using email or phone matching.
-      Normalize email by stripping surrounding whitespace and applying
-      lowercase conversion. Normalize phone by retaining only ASCII digits.
-      Never match empty normalized values. Names must not be used for
-      matching. Matching is transitive: contacts connected through a chain
-      of matching emails or phone numbers belong to the same group.
-      Return sorted zero-based original indices for groups containing
-      at least two contacts. Preserve original contact order and do not
-      modify or merge contact records.
+_ > nanoagent.plugin.v0001.Config:
+  id: contact-deduplicator
+  name: Contact Deduplicator
+  version: 0.1.0
+  status: in-development
+  spec: nanoagent.plugin/v0001
+  runtime > nanoagent.plugin.v0001.RuntimeConfig:
+    type: mcp_stdio
+    command: [uv, run, --frozen, python, -m, plugin]
+  permissions > nanoagent.plugin.v0001.PermissionsConfig:
+    network > nanoagent.plugin.v0001.NetworkConfig:
+      hosts: []
+    filesystem > nanoagent.plugin.v0001.FilesystemConfig:
+      write: [workspace]
+  tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
+    deduplicate_contacts:
+      description: Identifies duplicate contacts through normalized email or phone matches and returns deterministic groups of original contact indices.
+  tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
+    deduplicate-contacts:
+      description: Groups contacts sharing a non-empty normalized email address or phone number.
+      runner: tool
+      tools: [deduplicate_contacts]
+      reference: null
+      instructions: >-
+        Identify duplicate contacts using email or phone matching.
+        Normalize email by stripping surrounding whitespace and applying
+        lowercase conversion. Normalize phone by retaining only ASCII digits.
+        Never match empty normalized values. Names must not be used for
+        matching. Matching is transitive: contacts connected through a chain
+        of matching emails or phone numbers belong to the same group.
+        Return sorted zero-based original indices for groups containing
+        at least two contacts. Preserve original contact order and do not
+        modify or merge contact records.
