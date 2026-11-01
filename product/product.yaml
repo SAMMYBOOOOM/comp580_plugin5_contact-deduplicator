@@ -1,0 +1,17 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+  tagline: Deterministic contact deduplication using email and phone matching.
+  summary: >-
+    Contact Deduplicator identifies duplicate contacts using normalized
+    email addresses or phone numbers. It produces deterministic groups
+    of original contact indices, making the result independently
+    verifiable without network access or probabilistic matching.
+  highlights:
+    - Case-insensitive email matching with whitespace trimming.
+    - Phone matching after removal of formatting characters.
+    - Transitive duplicate grouping with deterministic index ordering.
+    - Independent verification of every reported duplicate group.
+  steps:
+    - "Input: Provide contacts with names and optional email and phone values."
+    - "Normalize: Standardize email and phone values using fixed rules."
+    - "Group: Identify connected contacts through matching email or phone values."
+    - "Verify: Independently recompute and compare the expected duplicate groups."
