@@ -1,4 +1,4 @@
-_ > nanoagent.plugin.v0001.ManifestConfig:
+_:
   id: contact-deduplicator
   name: Contact Deduplicator
   version: 0.1.0
