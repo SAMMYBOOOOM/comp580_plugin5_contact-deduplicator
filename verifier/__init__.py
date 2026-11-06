@@ -1,4 +1,6 @@
-from contract import TASKS, TOOLS, Task, Tool
+from contract import TASKS as TASKS
+from contract import TOOLS as TOOLS
+from contract import Task, Tool
 
 
 def _normalize_email(value):
@@ -140,15 +142,6 @@ def verify_input(tool, inputs):
 
     if not _valid_contacts(inputs):
         return "invalid contacts input"
-
-    for index, contact in enumerate(inputs["contacts"]):
-        if contact["email"] is not None:
-            if not isinstance(contact["email"], str):
-                return f"contacts[{index}].email must be a string or null"
-
-        if contact["phone"] is not None:
-            if not isinstance(contact["phone"], str):
-                return f"contacts[{index}].phone must be a string or null"
 
     return None
 
